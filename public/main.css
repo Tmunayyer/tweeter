@@ -1,3 +1,9 @@
+/* 
+    ===========
+    PAGE LAYOUT
+    ===========
+*/
+
 html {
   height: 100%;
   width: 100%;
@@ -41,6 +47,46 @@ body {
   margin-top: 0.5em;
 }
 
-/* page-header
-page-footer
-page-main */
+/* 
+    ====================
+    COMPONENT CONTAINERS
+    ====================
+*/
+
+.composer-container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  height: 15em;
+}
+
+/* 
+    =========
+    COMPONENT 
+    =========
+*/
+
+.card {
+  width: 400px;
+}
+
+.card-title {
+  display: block;
+  font-size: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: 400;
+}
+
+.editable-text-box {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.card-button {
+  margin-bottom: none;
+  margin-top: 0.5em;
+}

@@ -12,7 +12,7 @@ import {
 
 import { Navigation } from '../components/navbar.jsx';
 
-import { Composer } from '../components/composer.jsx';
+import { Composer } from '../components/composer/composer.jsx';
 
 export function HomePage({ user }) {
   const [view, setView] = useState('feed');
@@ -23,7 +23,7 @@ export function HomePage({ user }) {
         <Navigation user={user} setView={setView}></Navigation>
       </PageHeader>
       <PageMain>
-        <Composer></Composer>
+        <Composer user={user}></Composer>
       </PageMain>
       <PageFooter></PageFooter>
     </PageWrapper>

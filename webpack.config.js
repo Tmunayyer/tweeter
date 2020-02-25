@@ -4,14 +4,10 @@ const path = require('path');
 
 module.exports = {
   mode: process.env.MODE,
-  entry: './src/index.js',
+  entry: './src/index.jsx',
 
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,

@@ -1,3 +1,8 @@
+/**
+ * This is likely overkill for what I was trying to accomplish
+ *  but wanted to explore it.
+ */
+
 import React, { createContext, useState } from 'react';
 
 const defaultContext = {
@@ -26,7 +31,6 @@ export const Provider = (props) => {
   };
 
   const updateTwit = (value) => {
-    console.log('updating twit...');
     setTwit(value);
   };
 

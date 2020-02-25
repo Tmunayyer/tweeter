@@ -15,6 +15,9 @@ import { Context } from './context.jsx';
  */
 import api from '../../utilities/api.js';
 
+/**
+ * Just here for styling and page positioning
+ */
 function ComposerContainer({ children }) {
   return <div className="composer-container">{children}</div>;
 }
@@ -25,28 +28,11 @@ function CardTitle({ user }) {
   return <div className="card-title">{title}</div>;
 }
 
-function CardButton({ user }) {
-  const twitContext = useContext(Context);
-
-  const { twit, resetTwit } = twitContext;
-
-  const handleSubmit = async () => {
-    const url = '/api/twits';
-
-    api.post(url, { twit: twit });
-    resetTwit();
-  };
-
-  return (
-    <Button
-      className="card-button"
-      small={true}
-      text="Submit"
-      onClick={handleSubmit}
-    />
-  );
-}
-
+/**
+ * EditableTextBox and CardButton both make use of a context.
+ *  This was mostly to explore React contexts that I stumbled upon
+ *  while figuring useState and useEffects out.
+ */
 function EditableTextBox(props) {
   const twitContext = useContext(Context);
 
@@ -70,6 +56,28 @@ function EditableTextBox(props) {
     >
       {twit}
     </EditableText>
+  );
+}
+
+function CardButton(props) {
+  const twitContext = useContext(Context);
+
+  const { twit, resetTwit } = twitContext;
+
+  const handleSubmit = async () => {
+    const url = '/api/twits';
+
+    api.post(url, { twit: twit });
+    resetTwit();
+  };
+
+  return (
+    <Button
+      className="card-button"
+      small={true}
+      text="Submit"
+      onClick={handleSubmit}
+    />
   );
 }
 

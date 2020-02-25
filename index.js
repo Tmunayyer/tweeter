@@ -2,8 +2,12 @@ require('dotenv').config();
 
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
 const port = process.env.PORT;
+
+// some custome middleware
+const configureRoutes = require('./server/routes');
 
 /**
  * ==========
@@ -13,14 +17,18 @@ const port = process.env.PORT;
 
 // css from node modules
 app.use('/mod-css', express.static(__dirname + '/node_modules'));
-
+// serve up static files
 app.use(express.static('public'));
+// parsing
+app.use(bodyParser.json());
 
 /**
  * ======
  * ROUTES
  * ======
  */
+
+configureRoutes(app);
 
 /**
  * ============

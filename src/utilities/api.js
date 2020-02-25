@@ -14,7 +14,9 @@ export default {
     return axios.get(url, params);
   },
   post: (url, data) => {
-    console.log('the post function', url, data);
+    const params = data ? data : {};
+
+    return axios.post(url, params);
   },
   update: (url, data) => {},
   delete: (url, data) => {}

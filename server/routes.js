@@ -19,7 +19,13 @@ const api_twits = {
     res.send('success');
   },
   put: false,
-  remove: false
+  remove: (req, res) => {
+    const { twit_id } = req.query;
+
+    const removed_twit = datastore.deleteTwit(twit_id);
+
+    res.send({ message: 'success', data: removed_twit });
+  }
 };
 
 const routes = [api_twits];

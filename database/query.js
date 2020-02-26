@@ -53,18 +53,22 @@ const actions = {
       }
     }
 
+    const new_json = JSON.stringify(records);
+
     fs.unlinkSync(__dirname + '/db.json');
-    fs.writeFileSync(__dirname + '/db.json', new_records);
+    fs.writeFileSync(__dirname + '/db.json', new_json);
 
     return twit;
   },
-  'delete-twit': (records, { twit }) => {
+  'delete-twit': (records, twit_id) => {
     const filtered_records = records.filter((elem) => {
-      return elem.twit_id !== twit.twit_id;
+      return elem.twit_id !== twit_id;
     });
 
+    const new_json = JSON.stringify(filtered_records);
+
     fs.unlinkSync(__dirname + '/db.json');
-    fs.writeFileSync(__dirname + '/db.json', filtered_records);
+    fs.writeFileSync(__dirname + '/db.json', new_json);
 
     return twit;
   }

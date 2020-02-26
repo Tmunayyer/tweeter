@@ -21,5 +21,10 @@ export default {
     return axios.post(url, params);
   },
   update: (url, data) => {},
-  delete: (url, data) => {}
+  delete: (url, data) => {
+    const params = data ? data : {};
+
+    console.log('the data:', params);
+    return axios.delete(url, { params: params });
+  }
 };

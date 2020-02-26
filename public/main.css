@@ -82,6 +82,7 @@ body {
 
 .card {
   width: 450px;
+  padding: 13px;
 }
 
 .card-title {
@@ -98,7 +99,14 @@ body {
   margin-bottom: 0.5em;
 }
 
-.card-button {
+.card-actions {
   margin-bottom: none;
   margin-top: 0.5em;
+}
+
+.twit-card-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 }

@@ -26,12 +26,13 @@ const updateTwit = (twit) => {
   return data;
 };
 const deleteTwit = (twit) => {
-  const data = queryOne('delete-twit', twit.id);
+  const data = query('delete-twit', twit.id);
 
   return data;
 };
 
 module.exports = {
   getAllTwits: getAllTwits,
-  insertTwit: insertTwit
+  insertTwit: insertTwit,
+  deleteTwit: deleteTwit
 };

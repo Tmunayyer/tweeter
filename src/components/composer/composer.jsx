@@ -2,7 +2,12 @@
  * Modules
  */
 import React, { useContext } from 'react';
-import { Button, Card, Elevation, EditableText } from '@blueprintjs/core';
+import { Button, EditableText } from '@blueprintjs/core';
+
+/**
+ * Base Components
+ */
+import { Card, CardTitle, CardBody, CardActions } from '../cards.jsx';
 
 /**
  * State/Context
@@ -15,25 +20,18 @@ import { Context } from './context.jsx';
  */
 import api from '../../utilities/api.js';
 
-/**
- * Just here for styling and page positioning
- */
-function ComposerContainer({ children }) {
-  return <div className="composer-container">{children}</div>;
-}
-
-function CardTitle({ user }) {
+function Title({ user }) {
   let title = 'Sign in to write a twit!';
 
   return <div className="card-title">{title}</div>;
 }
 
 /**
- * EditableTextBox and CardButton both make use of a context.
+ * CardBody and CardActions both make use of a context.
  *  This was mostly to explore React contexts that I stumbled upon
  *  while figuring useState and useEffects out.
  */
-function EditableTextBox(props) {
+function Body(props) {
   const twitContext = useContext(Context);
 
   const { twit, updateTwit } = twitContext;
@@ -59,7 +57,7 @@ function EditableTextBox(props) {
   );
 }
 
-function CardButton(props) {
+function Actions(props) {
   const twitContext = useContext(Context);
 
   const { twit, resetTwit } = twitContext;
@@ -81,16 +79,20 @@ function CardButton(props) {
   );
 }
 
-export function Composer({ user }) {
+export function Composer(props) {
   return (
-    <ComposerContainer>
-      <Card className="card" interactive={false} elevation={Elevation.TWO}>
-        <Provider>
-          <CardTitle user={user} />
-          <EditableTextBox user={user} />
-          <CardButton user={user} />
-        </Provider>
+    <Provider>
+      <Card>
+        <CardTitle>
+          <Title></Title>
+        </CardTitle>
+        <CardBody>
+          <Body></Body>
+        </CardBody>
+        <CardActions>
+          <Actions></Actions>
+        </CardActions>
       </Card>
-    </ComposerContainer>
+    </Provider>
   );
 }

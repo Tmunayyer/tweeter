@@ -36,6 +36,9 @@ body {
 
 .page-main {
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   flex-grow: 3;
   width: 100%;
 }
@@ -62,6 +65,15 @@ body {
   height: 15em;
 }
 
+.card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 15em;
+  width: 400px;
+}
+
 /* 
     =========
     COMPONENT 
@@ -69,7 +81,7 @@ body {
 */
 
 .card {
-  width: 400px;
+  width: 450px;
 }
 
 .card-title {

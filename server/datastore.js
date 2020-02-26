@@ -32,5 +32,6 @@ const deleteTwit = (twit) => {
 };
 
 module.exports = {
+  getAllTwits: getAllTwits,
   insertTwit: insertTwit
 };

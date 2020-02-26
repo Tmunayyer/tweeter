@@ -15,7 +15,17 @@
 const fs = require('fs');
 
 const actions = {
-  'insert-twit': (json, { username, twit }) => {
+  'get-all': (records) => {
+    return records;
+  },
+  'get-user': (records, username) => {
+    const filtered_results = records.filter((elem) => {
+      return elem.username === username;
+    });
+
+    return filtered_results;
+  },
+  'insert-twit': (records, { username, twit }) => {
     const twit_id = Math.round(Math.random() * 1000);
 
     const to_append = {
@@ -24,22 +34,45 @@ const actions = {
       twit
     };
 
-    json.push(to_append);
+    records.push(to_append);
 
-    const new_json = JSON.stringify(json);
+    const new_records = JSON.stringify(records);
 
     fs.unlinkSync(__dirname + '/db.json');
-    fs.writeFileSync(__dirname + '/db.json', new_json);
+    fs.writeFileSync(__dirname + '/db.json', new_records);
 
     return to_append;
+  },
+  'update-twit': (records, { twit }) => {
+    for (let i = 0; i < records.length; i++) {
+      const record = records[i];
+
+      if (record.twit_id === twit.twit_id) {
+        record.twit = twit;
+        break;
+      }
+    }
+
+    fs.unlinkSync(__dirname + '/db.json');
+    fs.writeFileSync(__dirname + '/db.json', new_records);
+
+    return twit;
+  },
+  'delete-twit': (records, { twit }) => {
+    const filtered_records = records.filter((elem) => {
+      return elem.twit_id !== twit.twit_id;
+    });
+
+    fs.unlinkSync(__dirname + '/db.json');
+    fs.writeFileSync(__dirname + '/db.json', filtered_records);
+
+    return twit;
   }
 };
 
 const query = (statement, data) => {
   const old_json = JSON.parse(fs.readFileSync(__dirname + '/db.json'));
 
-  console.log('the old_json', old_json);
-  console.log('the statement', statement);
   // perform statement
   return actions[statement](old_json, data);
 };

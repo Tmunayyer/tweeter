@@ -2,7 +2,14 @@ const datastore = require('./datastore');
 
 const api_twits = {
   endpoint: '/api/twits',
-  get: false,
+  get: (req, res) => {
+    const twits = datastore.getAllTwits();
+
+    res.send({
+      message: 'success',
+      data: twits
+    });
+  },
   post: (req, res) => {
     const username = 'tempuser';
     const { twit } = req.body;

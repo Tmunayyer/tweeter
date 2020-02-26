@@ -8,10 +8,12 @@ import axios from 'axios';
  */
 
 export default {
-  get: (url, data) => {
+  get: async (url, data) => {
     const params = data ? data : {};
 
-    return axios.get(url, params);
+    const response = await axios.get(url, params);
+
+    return response.data;
   },
   post: (url, data) => {
     const params = data ? data : {};

@@ -1,1 +1,13 @@
-[{"id":1,"twit":"hello world","username":"thomas"},{"twit_id":231},{"twit_id":693,"username":"tempuser","twit":"testing"}]
+[
+  { "twit_id": 1, "twit": "hello world", "username": "thomas" },
+  {
+    "twit_id": 693,
+    "username": "NelsonMandela",
+    "twit": "The greatest glory in living lies not in never falling, but in rising every time we fall."
+  },
+  {
+    "twit_id": 393,
+    "username": "DinseyMeister",
+    "twit": "The way to get started is to quit talking and begin doing."
+  }
+]

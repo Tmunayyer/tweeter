@@ -22,7 +22,10 @@ const api_twits = {
   remove: (req, res) => {
     const { twit_id } = req.query;
 
-    const removed_twit = datastore.deleteTwit(twit_id);
+    const removed_twit = datastore.deleteTwit(parseInt(twit_id));
+
+    console.log('the twit_id:', twit_id);
+    console.log('the removed_twit:', removed_twit);
 
     res.send({ message: 'success', data: removed_twit });
   }

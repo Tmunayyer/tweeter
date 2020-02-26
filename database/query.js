@@ -61,9 +61,14 @@ const actions = {
     return twit;
   },
   'delete-twit': (records, twit_id) => {
+    let twit = { message: 'nothing was removed...' };
     const filtered_records = records.filter((elem) => {
+      console.log('the elem.twit_id:', typeof elem.twit_id, typeof twit_id);
+      if (elem.twit_id === twit_id) twit = elem;
       return elem.twit_id !== twit_id;
     });
+
+    console.log('the filtered_records:', filtered_records);
 
     const new_json = JSON.stringify(filtered_records);
 

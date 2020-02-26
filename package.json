@@ -30,5 +30,10 @@
     "normalize.css": "^8.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "/database/db.json"
+    ]
   }
 }

@@ -25,8 +25,8 @@ const updateTwit = (twit) => {
 
   return data;
 };
-const deleteTwit = (twit) => {
-  const data = query('delete-twit', twit.id);
+const deleteTwit = (twit_id) => {
+  const data = query('delete-twit', twit_id);
 
   return data;
 };

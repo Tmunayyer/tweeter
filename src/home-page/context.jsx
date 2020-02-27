@@ -1,13 +1,17 @@
 /**
- * This is likely overkill for what I was trying to accomplish
- *  but wanted to explore it.
+ * Modules
  */
-
 import React, { createContext, useState } from 'react';
+
+/**
+ * Utilities
+ */
 import api from '../utilities/api.js';
 
 const defaultContext = {
-  twit: ''
+  user: false,
+  twitList: [],
+  view: 'general-feed'
 };
 
 export const Context = createContext(defaultContext);

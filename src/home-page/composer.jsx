@@ -2,7 +2,6 @@
  * Modules
  */
 import React, { useState, useContext } from 'react';
-import { Button, EditableText } from '@blueprintjs/core';
 
 /**
  * Context
@@ -18,6 +17,7 @@ import {
   CardBody,
   CardActions
 } from '../components/cards.jsx';
+import { Button, EditableText } from '@blueprintjs/core';
 
 /**
  * Utilities

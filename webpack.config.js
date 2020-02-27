@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = {
   mode: process.env.MODE || 'production',
   entry: './src/index.jsx',
-
+  performance: { hints: false },
   module: {
     rules: [
       {

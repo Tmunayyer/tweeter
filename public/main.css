@@ -32,6 +32,7 @@ body {
   flex-grow: 3;
   max-height: 50px;
   margin-bottom: 0.5em;
+  min-height: 3.5em;
 }
 
 .page-main {
@@ -70,8 +71,8 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 15em;
   width: 400px;
+  padding-top: 1em;
 }
 
 /* 

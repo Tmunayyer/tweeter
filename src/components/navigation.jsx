@@ -1,3 +1,6 @@
+/**
+ * Modules
+ */
 import React, { useContext } from 'react';
 
 /**

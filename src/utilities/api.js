@@ -20,7 +20,13 @@ export default {
 
     return axios.post(url, params);
   },
-  update: (url, data) => {},
+  update: async (url, data) => {
+    const params = data ? data : {};
+
+    const response = await axios.put(url, params);
+
+    return response.data.data;
+  },
   delete: (url, data) => {
     const params = data ? data : {};
 

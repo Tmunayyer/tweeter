@@ -43,11 +43,14 @@ const actions = {
 
     return to_append;
   },
-  'update-twit': (records, { twit }) => {
+  'update-twit': (records, { twit_id, twit }) => {
+    let updated_twit = undefined;
+
     for (let i = 0; i < records.length; i++) {
       const record = records[i];
+      updated_twit = record;
 
-      if (record.twit_id === twit.twit_id) {
+      if (record.twit_id === twit_id) {
         record.twit = twit;
         break;
       }
@@ -58,17 +61,14 @@ const actions = {
     fs.unlinkSync(__dirname + '/db.json');
     fs.writeFileSync(__dirname + '/db.json', new_json);
 
-    return twit;
+    return updated_twit;
   },
   'delete-twit': (records, twit_id) => {
     let twit = { message: 'nothing was removed...' };
     const filtered_records = records.filter((elem) => {
-      console.log('the elem.twit_id:', typeof elem.twit_id, typeof twit_id);
       if (elem.twit_id === twit_id) twit = elem;
       return elem.twit_id !== twit_id;
     });
-
-    console.log('the filtered_records:', filtered_records);
 
     const new_json = JSON.stringify(filtered_records);
 

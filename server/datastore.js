@@ -20,8 +20,8 @@ const insertTwit = (username, twit) => {
 
   return data;
 };
-const updateTwit = (twit) => {
-  const data = queryOne('update-twit', username, twit.id);
+const updateTwit = (twit_id, twit) => {
+  const data = query('update-twit', { twit_id, twit });
 
   return data;
 };
@@ -34,5 +34,6 @@ const deleteTwit = (twit_id) => {
 module.exports = {
   getAllTwits: getAllTwits,
   insertTwit: insertTwit,
+  updateTwit: updateTwit,
   deleteTwit: deleteTwit
 };

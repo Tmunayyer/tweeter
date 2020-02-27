@@ -18,7 +18,13 @@ const api_twits = {
 
     res.send('success');
   },
-  put: false,
+  put: (req, res) => {
+    const { twit_id, twit } = req.body;
+
+    const updated_twit = datastore.updateTwit(parseInt(twit_id), twit);
+
+    res.send({ message: 'success', data: updated_twit });
+  },
   remove: (req, res) => {
     const { twit_id } = req.query;
 

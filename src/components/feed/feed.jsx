@@ -39,6 +39,7 @@ const ListItemActions = (props) => {
     setEditing,
     handleUpdate,
     handleDelete,
+    newTwit,
     setNewTwit
   } = props;
 
@@ -57,7 +58,14 @@ const ListItemActions = (props) => {
               setEditing(false);
             }}
           />
-          <Button small={true} text="Submit" />
+          <Button
+            small={true}
+            text="Submit"
+            onClick={() => {
+              handleUpdate(twit_id, newTwit);
+              setEditing(false);
+            }}
+          />
         </div>
       )}
       <div className="card-actions-right">
@@ -105,6 +113,7 @@ function Feed_ListItem(props) {
           handleUpdate={handleUpdate}
           isEditing={isEditing}
           setEditing={setEditing}
+          newTwit={newTwit}
           setNewTwit={setNewTwit}
           data={props.data}
         />
@@ -163,20 +172,23 @@ export function Feed(props) {
   const handleUpdate = async (twit_id, twit) => {
     try {
       const url = '/api/twits';
-      const response = await api.update(url, { twit_id: twit_id, twit: twit });
+      const { twit: new_twit } = await api.update(url, {
+        twit_id: twit_id,
+        twit: twit
+      });
 
       const updated_twitList = [...twitList];
 
-      for (let i = 0; i < twitList.length; i++) {
-        const twit = twitList[i];
+      for (let i = 0; i < updated_twitList.length; i++) {
+        const twit = updated_twitList[i];
 
-        if (twit.twit_id === response.data.data.twit_id) {
+        if (twit.twit_id === twit_id) {
           const updated_twit = {
             ...twit,
-            twit: response.data.data.twit
+            twit: new_twit
           };
 
-          twitList[i] = updated_twit;
+          updated_twitList[i] = updated_twit;
           break;
         }
       }

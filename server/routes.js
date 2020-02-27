@@ -17,8 +17,7 @@ const api_twits = {
   // =================
 
   post: (req, res) => {
-    const username = 'tempuser';
-    const { twit } = req.body;
+    const { username, twit } = req.body;
 
     datastore.insertTwit(username, twit);
 

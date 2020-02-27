@@ -28,5 +28,10 @@
     "twit_id": 5,
     "username": "AbeLincoln",
     "twit": "Do I not destroy my enemies when I make them my friends?"
+  },
+  {
+    "twit_id": 7,
+    "username": "JaneDoe",
+    "twit": "Tweeter is so awsome!"
   }
 ]

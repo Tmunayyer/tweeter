@@ -57,13 +57,13 @@ function Body(props) {
 }
 
 function Actions(props) {
-  const { fetchList } = useContext(HomePage_Context);
+  const { user, fetchList } = useContext(HomePage_Context);
   const { twit, setTwit } = props;
 
   const handleSubmit = async () => {
     const url = '/api/twits';
 
-    await api.post(url, { twit: twit });
+    await api.post(url, { username: user, twit: twit });
     setTwit('');
     fetchList();
   };

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 
 /**
  * Context
@@ -39,16 +38,33 @@ const ListItemBody = (props) => {
 };
 
 const ListItemActions = (props) => {
-  const {
-    isEditing,
-    setEditing,
-    handleUpdate,
-    handleDelete,
-    newTwit,
-    setNewTwit
-  } = props;
+  const { fetchList } = useContext(HomePage_Context);
+
+  const { isEditing, setEditing, newTwit, setNewTwit } = props;
 
   const { twit_id, twit } = props.data;
+
+  const handleDelete = async (twit_id) => {
+    try {
+      const url = '/api/twits';
+      await api.delete(url, { twit_id: twit_id });
+
+      fetchList();
+    } catch (err) {
+      console.log('ERROR: deleting twit...', err);
+    }
+  };
+
+  const handleUpdate = async (twit_id, twit) => {
+    try {
+      const url = '/api/twits';
+      await api.update(url, { twit_id, twit });
+
+      fetchList();
+    } catch (err) {
+      console.log('ERROR: updating twit...', err);
+    }
+  };
 
   return (
     <div className="twit-card-actions">
@@ -99,7 +115,6 @@ function Feed_ListItem(props) {
   const [newTwit, setNewTwit] = useState();
 
   const { twit, username } = props.data;
-  const { handleDelete, handleUpdate } = props;
 
   return (
     <Card elevation={isEditing ? 'FOUR' : false}>
@@ -114,8 +129,6 @@ function Feed_ListItem(props) {
       </CardBody>
       <CardActions>
         <ListItemActions
-          handleDelete={handleDelete}
-          handleUpdate={handleUpdate}
           isEditing={isEditing}
           setEditing={setEditing}
           newTwit={newTwit}
@@ -128,93 +141,19 @@ function Feed_ListItem(props) {
 }
 
 function Feed_ListWrapper(props) {
-  const { twitList, handleDelete, handleUpdate } = props;
+  const { twitList } = props;
 
   return twitList.map((twit, index) => {
-    return (
-      <Feed_ListItem
-        data={twit}
-        index={index}
-        key={twit.twit_id}
-        handleDelete={handleDelete}
-        handleUpdate={handleUpdate}
-      />
-    );
+    return <Feed_ListItem data={twit} index={index} key={twit.twit_id} />;
   });
 }
 
-export function Feed(props) {
-  // const [twitList, setTwitList] = useState([]);
-  const { twitList, setTwitList, fetchList } = useContext(HomePage_Context);
-
-  // const fetchList = async () => {
-  //   try {
-  //     const url = '/api/twits';
-  //     const { data } = await api.get(url);
-
-  //     setTwitList(data);
-  //   } catch (err) {
-  //     console.log('ERROR: fetching list...', err);
-  //     setTwitList([]);
-  //   }
-  // };
-
-  const handleDelete = async (twit_id) => {
-    try {
-      const url = '/api/twits';
-      const response = await api.delete(url, { twit_id: twit_id });
-
-      const filtered_twitList = twitList.filter((twit) => {
-        return twit.twit_id !== response.data.data.twit_id;
-      });
-
-      setTwitList(filtered_twitList);
-    } catch (err) {
-      console.log('ERROR: deleting twit...', err);
-      setTwitList(twitList);
-    }
-  };
-
-  const handleUpdate = async (twit_id, twit) => {
-    try {
-      const url = '/api/twits';
-      const { twit: new_twit } = await api.update(url, {
-        twit_id: twit_id,
-        twit: twit
-      });
-
-      const updated_twitList = [...twitList];
-
-      for (let i = 0; i < updated_twitList.length; i++) {
-        const twit = updated_twitList[i];
-
-        if (twit.twit_id === twit_id) {
-          const updated_twit = {
-            ...twit,
-            twit: new_twit
-          };
-
-          updated_twitList[i] = updated_twit;
-          break;
-        }
-      }
-
-      setTwitList(updated_twitList);
-    } catch (err) {
-      console.log('ERROR: updating twit...', err);
-      setTwitList(twitList);
-    }
-  };
+export function Feed() {
+  const { twitList, fetchList } = useContext(HomePage_Context);
 
   useEffect(() => {
     fetchList();
   }, []);
 
-  return (
-    <Feed_ListWrapper
-      twitList={twitList}
-      handleDelete={handleDelete}
-      handleUpdate={handleUpdate}
-    />
-  );
+  return <Feed_ListWrapper twitList={twitList} />;
 }

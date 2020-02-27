@@ -30,9 +30,9 @@ export const Provider = ({ children }) => {
   const fetchList = async () => {
     try {
       const url = '/api/twits';
-      const { data } = await api.get(url);
+      const twits = await api.get(url);
 
-      setTwitList(data);
+      setTwitList(twits);
     } catch (err) {
       console.log('ERROR: fetching list...', err);
       setTwitList([]);

@@ -13,12 +13,14 @@ export default {
 
     const response = await axios.get(url, params);
 
-    return response.data;
+    return response.data.data;
   },
-  post: (url, data) => {
+  post: async (url, data) => {
     const params = data ? data : {};
 
-    return axios.post(url, params);
+    const response = await axios.post(url, params);
+
+    return response.data.data;
   },
   update: async (url, data) => {
     const params = data ? data : {};
@@ -27,9 +29,11 @@ export default {
 
     return response.data.data;
   },
-  delete: (url, data) => {
+  delete: async (url, data) => {
     const params = data ? data : {};
 
-    return axios.delete(url, { params: params });
+    const response = await axios.delete(url, { params: params });
+
+    return response.data.data;
   }
 };

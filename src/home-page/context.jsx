@@ -16,7 +16,7 @@ export const Provider = ({ children }) => {
   /**
    * Set up state to make up context
    */
-  const [user, setUser] = useState('Jane Doe');
+  const [user, setUser] = useState('JaneDoe'); //hard coded for simplicity
   const [twitList, setTwitList] = useState([]);
   const [view, setView] = useState('general-feed');
 

@@ -1,8 +1,13 @@
 /**
  * Modules
  */
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, EditableText } from '@blueprintjs/core';
+
+/**
+ * Context
+ */
+import { Context as HomePage_Context } from '../../home-page/context.jsx';
 
 /**
  * Base Components
@@ -10,37 +15,26 @@ import { Button, EditableText } from '@blueprintjs/core';
 import { Card, CardTitle, CardBody, CardActions } from '../cards.jsx';
 
 /**
- * State/Context
- */
-import { Provider } from './context.jsx';
-import { Context } from './context.jsx';
-
-import { Context as HomePage_Context } from '../../home-page/context.jsx';
-
-/**
  * Utilities
  */
 import api from '../../utilities/api.js';
 
-function Title({ user }) {
-  let title = 'Sign in to write a twit!';
+function Title() {
+  const { user } = useContext(HomePage_Context);
+  let title = 'Please Sign in to Twit!';
+
+  if (user) {
+    title = `@${user} says:`;
+  }
 
   return <div className="card-title">{title}</div>;
 }
 
-/**
- * CardBody and CardActions both make use of a context.
- *  This was mostly to explore React contexts that I stumbled upon
- *  while figuring useState and useEffects out.
- */
 function Body(props) {
-  const twitContext = useContext(Context);
+  const { user } = useContext(HomePage_Context);
+  const { twit, setTwit } = props;
 
-  const { twit, updateTwit } = twitContext;
-
-  //   const disabled = user === 'guest' ? true : false;
-  // TODO uncomment above line
-  const disabled = false;
+  const disabled = user ? false : true;
 
   return (
     <EditableText
@@ -51,25 +45,21 @@ function Body(props) {
       multiline={true}
       minLines={3}
       maxLines={12}
-      onChange={updateTwit}
+      onChange={setTwit}
       disabled={disabled}
-    >
-      {twit}
-    </EditableText>
+    />
   );
 }
 
 function Actions(props) {
-  const twitContext = useContext(Context);
   const { fetchList } = useContext(HomePage_Context);
-
-  const { twit, resetTwit } = twitContext;
+  const { twit, setTwit } = props;
 
   const handleSubmit = async () => {
     const url = '/api/twits';
 
     await api.post(url, { twit: twit });
-    resetTwit();
+    setTwit('');
     fetchList();
   };
 
@@ -83,20 +73,20 @@ function Actions(props) {
   );
 }
 
-export function Composer(props) {
+export function Composer() {
+  const [twit, setTwit] = useState('');
+
   return (
-    <Provider>
-      <Card>
-        <CardTitle>
-          <Title></Title>
-        </CardTitle>
-        <CardBody>
-          <Body></Body>
-        </CardBody>
-        <CardActions>
-          <Actions></Actions>
-        </CardActions>
-      </Card>
-    </Provider>
+    <Card>
+      <CardTitle>
+        <Title></Title>
+      </CardTitle>
+      <CardBody>
+        <Body twit={twit} setTwit={setTwit}></Body>
+      </CardBody>
+      <CardActions>
+        <Actions twit={twit} setTwit={setTwit}></Actions>
+      </CardActions>
+    </Card>
   );
 }

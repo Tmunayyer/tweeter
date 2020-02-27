@@ -2,6 +2,9 @@ const datastore = require('./datastore');
 
 const api_twits = {
   endpoint: '/api/twits',
+
+  // =================
+
   get: (req, res) => {
     const twits = datastore.getAllTwits();
 
@@ -10,6 +13,9 @@ const api_twits = {
       data: twits
     });
   },
+
+  // =================
+
   post: (req, res) => {
     const username = 'tempuser';
     const { twit } = req.body;
@@ -18,6 +24,9 @@ const api_twits = {
 
     res.send('success');
   },
+
+  // =================
+
   put: (req, res) => {
     const { twit_id, twit } = req.body;
 
@@ -25,6 +34,9 @@ const api_twits = {
 
     res.send({ message: 'success', data: updated_twit });
   },
+
+  // =================
+
   remove: (req, res) => {
     const { twit_id } = req.query;
 

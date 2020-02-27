@@ -1,16 +1,12 @@
 /**
  * This is the module that will be used by our server/endpoints.
+ *  usually it would take in a query statement and params but ill
+ *  just make fake statements.
  */
-const { query, queryOne } = require('../database/query');
+const { query } = require('../database/query');
 
 const getAllTwits = () => {
   const data = query('get-all');
-
-  return data;
-};
-
-const getUserTwits = (username) => {
-  const data = query('get-user', username);
 
   return data;
 };

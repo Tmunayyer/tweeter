@@ -16,7 +16,7 @@ const fs = require('fs');
 
 const actions = {
   'get-all': (records) => {
-    return records;
+    return records.reverse();
   },
   'get-user': (records, username) => {
     const filtered_results = records.filter((elem) => {

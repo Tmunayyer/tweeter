@@ -1,4 +1,4 @@
-# Propoganda Bonanza
+# Tweeter
 
 ## Description
 
@@ -22,4 +22,4 @@ $ npm install
 $ npm start
 ```
 
-3. Navigate to http://localhost:3001/
+3. Navigate to http://localhost:3000

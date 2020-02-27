@@ -24,7 +24,6 @@ export default {
   delete: (url, data) => {
     const params = data ? data : {};
 
-    console.log('the data:', params);
     return axios.delete(url, { params: params });
   }
 };

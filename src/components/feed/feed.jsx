@@ -14,15 +14,7 @@ import api from '../../utilities/api.js';
 
 function Feed_ListItem(props) {
   const { twit_id, twit, username } = props.data;
-
-  const handleDelete = async () => {
-    try {
-      const url = '/api/twits';
-      await api.delete(url, { twit_id: twit_id });
-    } catch (err) {
-      console.log('ERROR: deleting twit...', err);
-    }
-  };
+  const { handleDelete } = props;
 
   const ListItemActions = () => {
     return (
@@ -32,7 +24,7 @@ function Feed_ListItem(props) {
           minimal={true}
           small={true}
           icon="delete"
-          onClick={handleDelete}
+          onClick={() => handleDelete(twit_id)}
         ></Button>
       </div>
     );
@@ -49,10 +41,17 @@ function Feed_ListItem(props) {
 }
 
 function Feed_ListWrapper(props) {
-  const { twitList } = props;
+  const { twitList, handleDelete } = props;
 
   return twitList.map((twit, index) => {
-    return <Feed_ListItem data={twit} index={index} key={twit.id} />;
+    return (
+      <Feed_ListItem
+        data={twit}
+        handleDelete={handleDelete}
+        index={index}
+        key={twit.twit_id}
+      />
+    );
   });
 }
 
@@ -71,9 +70,25 @@ export function Feed(props) {
     }
   };
 
+  const handleDelete = async (twit_id) => {
+    try {
+      const url = '/api/twits';
+      const response = await api.delete(url, { twit_id: twit_id });
+
+      const filtered_twitList = twitList.filter((elem) => {
+        return elem.twit_id !== response.data.data.twit_id;
+      });
+
+      setTwitList(filtered_twitList);
+    } catch (err) {
+      console.log('ERROR: deleting twit...', err);
+      setTwitList(twitList);
+    }
+  };
+
   useEffect(() => {
     fetchList();
   }, []);
 
-  return <Feed_ListWrapper twitList={twitList} />;
+  return <Feed_ListWrapper twitList={twitList} handleDelete={handleDelete} />;
 }

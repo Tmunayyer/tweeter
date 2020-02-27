@@ -24,9 +24,6 @@ const api_twits = {
 
     const removed_twit = datastore.deleteTwit(parseInt(twit_id));
 
-    console.log('the twit_id:', twit_id);
-    console.log('the removed_twit:', removed_twit);
-
     res.send({ message: 'success', data: removed_twit });
   }
 };

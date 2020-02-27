@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 // some custome middleware
 const configureRoutes = require('./server/routes');
@@ -35,4 +35,4 @@ configureRoutes(app);
  * SERVER START
  * ============
  */
-app.listen(port, () => console.log(`Server started at localhost:${port}`));
+app.listen(port, () => console.log(`\n\rServer started at localhost:${port}`));

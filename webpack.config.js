@@ -3,7 +3,7 @@ require('dotenv').config();
 const path = require('path');
 
 module.exports = {
-  mode: process.env.MODE,
+  mode: process.env.MODE || 'production',
   entry: './src/index.jsx',
 
   module: {

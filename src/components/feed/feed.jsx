@@ -33,16 +33,34 @@ const ListItemBody = (props) => {
   );
 };
 
-function Feed_ListItem(props) {
-  const [isEditing, setEditing] = useState(false);
-  const [newTwit, setNewTwit] = useState();
+const ListItemActions = (props) => {
+  const {
+    isEditing,
+    setEditing,
+    handleUpdate,
+    handleDelete,
+    setNewTwit
+  } = props;
 
-  const { twit_id, twit, username } = props.data;
-  const { handleDelete, handleUpdate } = props;
+  const { twit_id, twit } = props.data;
 
-  const ListItemActions = () => {
-    return (
-      <div className="twit-card-actions">
+  return (
+    <div className="twit-card-actions">
+      {isEditing && (
+        <div className="card-actions-left">
+          <Button
+            minimal={true}
+            small={true}
+            text="Cancel"
+            onClick={() => {
+              setNewTwit(twit);
+              setEditing(false);
+            }}
+          />
+          <Button small={true} text="Submit" />
+        </div>
+      )}
+      <div className="card-actions-right">
         <Button
           minimal={true}
           small={true}
@@ -51,16 +69,24 @@ function Feed_ListItem(props) {
             setEditing(!isEditing);
             setNewTwit(twit);
           }}
-        ></Button>
+        />
         <Button
           minimal={true}
           small={true}
           icon="delete"
           onClick={() => handleDelete(twit_id)}
-        ></Button>
+        />
       </div>
-    );
-  };
+    </div>
+  );
+};
+
+function Feed_ListItem(props) {
+  const [isEditing, setEditing] = useState(false);
+  const [newTwit, setNewTwit] = useState();
+
+  const { twit, username } = props.data;
+  const { handleDelete, handleUpdate } = props;
 
   return (
     <Card elevation={isEditing ? 'FOUR' : false}>
@@ -74,7 +100,14 @@ function Feed_ListItem(props) {
         />
       </CardBody>
       <CardActions>
-        <ListItemActions />
+        <ListItemActions
+          handleDelete={handleDelete}
+          handleUpdate={handleUpdate}
+          isEditing={isEditing}
+          setEditing={setEditing}
+          setNewTwit={setNewTwit}
+          data={props.data}
+        />
       </CardActions>
     </Card>
   );

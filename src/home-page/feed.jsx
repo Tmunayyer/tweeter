@@ -46,11 +46,11 @@ const ListItemBody = (props) => {
 };
 
 const ListItemActions = (props) => {
-  const { fetchList } = useContext(HomePage_Context);
+  const { user, fetchList } = useContext(HomePage_Context);
 
   const { isEditing, setEditing, newTwit, setNewTwit } = props;
 
-  const { twit_id, twit } = props.data;
+  const { twit_id, twit, username } = props.data;
 
   const handleDelete = async (twit_id) => {
     try {
@@ -97,23 +97,25 @@ const ListItemActions = (props) => {
           />
         </div>
       )}
-      <div className="card-actions-right">
-        <Button
-          minimal={true}
-          small={true}
-          icon="edit"
-          onClick={() => {
-            setEditing(!isEditing);
-            setNewTwit(twit);
-          }}
-        />
-        <Button
-          minimal={true}
-          small={true}
-          icon="delete"
-          onClick={() => handleDelete(twit_id)}
-        />
-      </div>
+      {user === username && (
+        <div className="card-actions-right">
+          <Button
+            minimal={true}
+            small={true}
+            icon="edit"
+            onClick={() => {
+              setEditing(!isEditing);
+              setNewTwit(twit);
+            }}
+          />
+          <Button
+            minimal={true}
+            small={true}
+            icon="delete"
+            onClick={() => handleDelete(twit_id)}
+          />
+        </div>
+      )}
     </div>
   );
 };

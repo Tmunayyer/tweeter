@@ -15,6 +15,8 @@ import { Card, CardTitle, CardBody, CardActions } from '../cards.jsx';
 import { Provider } from './context.jsx';
 import { Context } from './context.jsx';
 
+import { Context as HomePage_Context } from '../../home-page/context.jsx';
+
 /**
  * Utilities
  */
@@ -59,6 +61,7 @@ function Body(props) {
 
 function Actions(props) {
   const twitContext = useContext(Context);
+  const homepageContext = useContext(HomePage_Context);
 
   const { twit, resetTwit } = twitContext;
 

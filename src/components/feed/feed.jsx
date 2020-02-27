@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+
+/**
+ * Context
+ */
+import { Context as HomePage_Context } from '../../home-page/context.jsx';
 
 /**
  * Base Components
@@ -139,19 +144,20 @@ function Feed_ListWrapper(props) {
 }
 
 export function Feed(props) {
-  const [twitList, setTwitList] = useState([]);
+  // const [twitList, setTwitList] = useState([]);
+  const { twitList, setTwitList, fetchList } = useContext(HomePage_Context);
 
-  const fetchList = async () => {
-    try {
-      const url = '/api/twits';
-      const { data } = await api.get(url);
+  // const fetchList = async () => {
+  //   try {
+  //     const url = '/api/twits';
+  //     const { data } = await api.get(url);
 
-      setTwitList(data);
-    } catch (err) {
-      console.log('ERROR: fetching list...', err);
-      setTwitList([]);
-    }
-  };
+  //     setTwitList(data);
+  //   } catch (err) {
+  //     console.log('ERROR: fetching list...', err);
+  //     setTwitList([]);
+  //   }
+  // };
 
   const handleDelete = async (twit_id) => {
     try {

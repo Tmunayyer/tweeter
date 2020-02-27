@@ -1,4 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+
+/**
+ * Context
+ */
+import { Context as HomePage_Context } from '../home-page/context.jsx';
 
 /**
  * Blueprint Components
@@ -6,7 +11,9 @@ import React, { useState } from 'react';
 import { Navbar, Alignment } from '@blueprintjs/core';
 import { Button } from '@blueprintjs/core';
 
-export function Navigation({ user, setView }) {
+export function Navigation(props) {
+  const { user, setView } = useContext(HomePage_Context);
+
   return (
     <Navbar fixedToTop={true}>
       <Navbar.Group align={Alignment.LEFT}>
@@ -17,7 +24,7 @@ export function Navigation({ user, setView }) {
           icon="feed"
           text="Feed"
           onClick={() => {
-            setView('feed');
+            setView('user-feed');
           }}
         />
         <Button

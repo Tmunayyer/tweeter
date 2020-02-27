@@ -3,18 +3,23 @@ import React, { useState, useEffect, useContext } from 'react';
 /**
  * Context
  */
-import { Context as HomePage_Context } from '../../home-page/context.jsx';
+import { Context as HomePage_Context } from './context.jsx';
 
 /**
  * Base Components
  */
-import { Card, CardTitle, CardBody, CardActions } from '../cards.jsx';
+import {
+  Card,
+  CardTitle,
+  CardBody,
+  CardActions
+} from '../components/cards.jsx';
 import { Button, EditableText } from '@blueprintjs/core';
 
 /**
  * Utilities
  */
-import api from '../../utilities/api.js';
+import api from '../utilities/api.js';
 
 const ListItemBody = (props) => {
   const { isEditing, twit, newTwit, setNewTwit } = props;

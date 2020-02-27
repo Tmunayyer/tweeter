@@ -12,12 +12,12 @@ import {
 
 import { Navigation } from '../components/navigation.jsx';
 
-import { Composer } from '../components/composer/composer.jsx';
-import { Feed } from '../components/feed/feed.jsx';
+import { Composer } from './composer.jsx';
+import { Feed } from './feed.jsx';
 
 import { Provider as HomePage_Provider } from './context.jsx';
 
-export function HomePage({ user }) {
+export function HomePage() {
   return (
     <HomePage_Provider>
       <PageWrapper>
